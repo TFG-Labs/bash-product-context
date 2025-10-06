@@ -1,8 +1,8 @@
 {
-  "name": "product-context",
-  "vendor": "vtex",
-  "version": "0.10.1",
-  "title": "VTEX Product Context",
+  "name": "bash-product-context",
+  "vendor": "thefoschini",
+  "version": "1.0.0",
+  "title": "Bash Product Context",
   "description": "",
   "settingsSchema": {},
   "dependencies": {},

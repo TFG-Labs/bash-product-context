@@ -5,6 +5,7 @@ import { ProductDispatchContext } from './ProductDispatchContext'
 import { useProductReducer, getSelectedItem } from './reducer'
 import { getSelectedSKUFromQueryString } from './modules/skuQueryString'
 import { MaybeProduct, Item } from './ProductTypes'
+import { useProductFromAPI } from './useProductFromAPI'
 
 export interface ProductAndQuery {
   query: Record<string, any>
@@ -107,9 +108,24 @@ function useSelectedItemFromId(
 
 const ProductContextProvider: FC<ProductAndQuery> = ({
   query,
-  product,
+  product: propProduct,
   children,
 }) => {
+  console.log('🚀 🚀 🚀 BASH PRODUCT CONTEXT PROVIDER: COMPONENT CALLED!')
+  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: Props received - query:', query, 'product:', propProduct)
+  
+  // 🚀 BASH ENHANCEMENT: Fetch product data from our API
+  const { product: apiProduct, loading: apiLoading, error: apiError } = useProductFromAPI()
+  
+  // Use API product if available, otherwise fallback to prop product
+  const product = apiProduct || propProduct
+  
+  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: API Loading:', apiLoading)
+  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: API Error:', apiError)
+  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: API Product:', apiProduct)
+  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: Prop Product:', propProduct)
+  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: Final Product:', product)
+
   const [state, dispatch] = useProductReducer({ query, product })
 
   // These hooks are used to keep the state in sync with API data, specially when switching between products without exiting the product page

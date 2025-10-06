@@ -5066,6 +5066,10 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
+"thefoschini.bash-product-context@https://testingws--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.bash-product-context@1.0.0+build1759776867/public/@types/thefoschini.bash-product-context":
+  version "1.0.0"
+  resolved "https://testingws--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.bash-product-context@1.0.0+build1759776867/public/@types/thefoschini.bash-product-context#8f6be5e8aa72e320c63245f2e31fec51920bb2cd"
+
 throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
@@ -5291,9 +5295,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.render-runtime@http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@8.62.2/public/_types/react":
-  version "8.62.2"
-  resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@8.62.2/public/_types/react#9449eec2e1744531e3a9827f48c86059963a190a"
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.136.1/public/@types/vtex.render-runtime":
+  version "8.136.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.136.1/public/@types/vtex.render-runtime#f163acbdb0fcc9be2065a34eb4fc797093f6d0ce"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
