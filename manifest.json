@@ -1,7 +1,7 @@
 {
   "name": "bash-product-context",
   "vendor": "thefoschini",
-  "version": "1.0.1-beta.0",
+  "version": "1.0.2-beta.0",
   "title": "Bash Product Context",
   "description": "",
   "settingsSchema": {},
@@ -10,7 +10,7 @@
     "react": "3.x",
     "docs": "0.x"
   },
-    "scripts": {
+  "scripts": {
     "postreleasy": "vtex publish --verbose --force"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
