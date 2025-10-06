@@ -1,7 +1,7 @@
 {
   "name": "bash-product-context",
   "vendor": "thefoschini",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "title": "Bash Product Context",
   "description": "",
   "settingsSchema": {},
