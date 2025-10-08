@@ -7,6 +7,7 @@ interface BashProductContextProviderProps {
   apiBaseUrl?: string
   fallbackProduct?: MaybeProduct
   query?: Record<string, any>
+  debug?: boolean
   children: React.ReactNode
 }
 
@@ -22,10 +23,12 @@ const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
   apiBaseUrl = 'https://be1160c66d5b.ngrok-free.app',
   fallbackProduct = null,
   query = {},
+  debug = false,
   children,
 }) => {
   const [product, setProduct] = useState<MaybeProduct>(fallbackProduct)
   const [loading, setLoading] = useState(!!productSlug)
+  const [notFound, setNotFound] = useState(false)
 
   useEffect(() => {
     if (!productSlug) {
@@ -37,13 +40,14 @@ const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
     const fetchProduct = async () => {
       try {
         setLoading(true)
-        console.log('🚀 BASH PRODUCT CONTEXT: Fetching product from API:', `${apiBaseUrl}/v1/products/product/vtex/${productSlug}`)
+        if (debug) {
+          console.log('🚀 BASH PRODUCT CONTEXT: Fetching product from API:', `${apiBaseUrl}/v1/products/product/vtex/${productSlug}`)
+        }
         
         const response = await fetch(`${apiBaseUrl}/v1/products/product/vtex/${productSlug}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'ngrok-skip-browser-warning': 'true', // Skip ngrok browser warning
           },
         })
 
@@ -53,39 +57,74 @@ const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
 
         const data: ApiResponse = await response.json()
         
-        console.log('🚀 BASH PRODUCT CONTEXT: API Response:', data)
+        if (debug) {
+          console.log('🚀 BASH PRODUCT CONTEXT: API Response:', data)
+        }
 
         if (data.success && data.data && data.data.length > 0) {
           const fetchedProduct = data.data[0]
-          console.log('🚀 BASH PRODUCT CONTEXT: Setting product:', fetchedProduct)
+          if (debug) {
+            console.log('🚀 BASH PRODUCT CONTEXT: Setting product:', fetchedProduct)
+          }
           setProduct(fetchedProduct)
+          setNotFound(false)
         } else {
-          console.warn('🚀 BASH PRODUCT CONTEXT: No product data, using fallback:', fallbackProduct)
-          setProduct(fallbackProduct)
+          if (debug) {
+            console.warn('🚀 BASH PRODUCT CONTEXT: No product data found')
+          }
+          setProduct(null)
+          setNotFound(true)
         }
       } catch (error) {
         console.error('🚀 BASH PRODUCT CONTEXT: Error fetching product:', error)
-        console.log('🚀 BASH PRODUCT CONTEXT: Using fallback product:', fallbackProduct)
-        setProduct(fallbackProduct)
+        setProduct(null)
+        setNotFound(true)
       } finally {
         setLoading(false)
       }
     }
 
     fetchProduct()
-  }, [productSlug, apiBaseUrl, fallbackProduct])
+  }, [productSlug, apiBaseUrl, fallbackProduct, debug])
 
   // Show loading state
   if (loading) {
-    console.log('🚀 BASH PRODUCT CONTEXT: Loading product data...')
+    return (
+      <div style={{
+        width: '100%',
+        minHeight: '600px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '40px 20px'
+      }}>
+        <div style={{
+          width: '48px',
+          height: '48px',
+          border: '4px solid #f3f3f3',
+          borderTop: '4px solid #040404',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite'
+        }} />
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    )
+  }
+
+  // Show not found page if product doesn't exist
+  if (notFound) {
+    // Provide null product - the conditional renderer will handle showing 404
     return (
       <ProductContextProvider query={query} product={null}>
         {children}
       </ProductContextProvider>
     )
   }
-
-  console.log('🚀 BASH PRODUCT CONTEXT: Providing product to context:', product)
 
   return (
     <ProductContextProvider query={query} product={product}>
