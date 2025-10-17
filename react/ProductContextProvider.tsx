@@ -110,13 +110,8 @@ const ProductContextProvider: FC<ProductAndQuery> = ({
   product: propProduct,
   children,
 }) => {
-  console.log('🚀 🚀 🚀 BASH PRODUCT CONTEXT PROVIDER: COMPONENT CALLED!')
-  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: Props received - query:', query, 'product:', propProduct)
-  
   // Use the product passed as prop (BashProductContextProvider already fetches it)
   const product = propProduct
-  
-  console.log('🚀 BASH PRODUCT CONTEXT PROVIDER: Final Product:', product)
 
   const [state, dispatch] = useProductReducer({ query, product })
 

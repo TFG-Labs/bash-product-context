@@ -12,7 +12,7 @@ interface BashProductContextProviderProps {
 }
 
 interface ApiResponse {
-  data: MaybeProduct[]
+  data: MaybeProduct[] | null
   success: boolean
   errorCode: string | null
   errorMessage: string | null
@@ -20,7 +20,7 @@ interface ApiResponse {
 
 const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
   productSlug,
-  apiBaseUrl = 'https://be1160c66d5b.ngrok-free.app',
+  apiBaseUrl = 'https://web-api.bash.com',
   fallbackProduct = null,
   query = {},
   debug = false,
@@ -40,9 +40,6 @@ const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
     const fetchProduct = async () => {
       try {
         setLoading(true)
-        if (debug) {
-          console.log('🚀 BASH PRODUCT CONTEXT: Fetching product from API:', `${apiBaseUrl}/v1/products/product/vtex/${productSlug}`)
-        }
         
         const response = await fetch(`${apiBaseUrl}/v1/products/product/vtex/${productSlug}`, {
           method: 'GET',
@@ -56,27 +53,16 @@ const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
         }
 
         const data: ApiResponse = await response.json()
-        
-        if (debug) {
-          console.log('🚀 BASH PRODUCT CONTEXT: API Response:', data)
-        }
 
-        if (data.success && data.data && data.data.length > 0) {
+        if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
           const fetchedProduct = data.data[0]
-          if (debug) {
-            console.log('🚀 BASH PRODUCT CONTEXT: Setting product:', fetchedProduct)
-          }
           setProduct(fetchedProduct)
           setNotFound(false)
         } else {
-          if (debug) {
-            console.warn('🚀 BASH PRODUCT CONTEXT: No product data found')
-          }
           setProduct(null)
           setNotFound(true)
         }
       } catch (error) {
-        console.error('🚀 BASH PRODUCT CONTEXT: Error fetching product:', error)
         setProduct(null)
         setNotFound(true)
       } finally {
