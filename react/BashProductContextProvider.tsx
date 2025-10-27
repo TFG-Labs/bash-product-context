@@ -41,7 +41,7 @@ const BashProductContextProvider: FC<BashProductContextProviderProps> = ({
       try {
         setLoading(true)
         
-        const response = await fetch(`${apiBaseUrl}/v1/products/product/vtex/${productSlug}`, {
+        const response = await fetch(`${apiBaseUrl}/v1/products/product/slug/${productSlug}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

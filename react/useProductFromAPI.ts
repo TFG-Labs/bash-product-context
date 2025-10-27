@@ -34,7 +34,7 @@ export function useProductFromAPI(): {
         setLoading(true)
         setError(null)
 
-        const response = await fetch(`${API_BASE_URL}/v1/products/product/vtex/${HARDCODED_SLUG}`, {
+        const response = await fetch(`${API_BASE_URL}/v1/products/product/slug/${HARDCODED_SLUG}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
