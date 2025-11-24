@@ -5066,9 +5066,9 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
-"thefoschini.bash-product-context@http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.bash-product-context@1.0.7/public/@types/thefoschini.bash-product-context":
-  version "1.0.7"
-  resolved "http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.bash-product-context@1.0.7/public/@types/thefoschini.bash-product-context#8f11580f83b424589202332d86d2127c09c0663e"
+"thefoschini.bash-product-context@http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.bash-product-context@1.0.9/public/@types/thefoschini.bash-product-context":
+  version "1.0.9"
+  resolved "http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.bash-product-context@1.0.9/public/@types/thefoschini.bash-product-context#6ab3a05996d8559cd14ccef9335302fdb1a8ab3e"
 
 throat@^4.0.0:
   version "4.1.0"
